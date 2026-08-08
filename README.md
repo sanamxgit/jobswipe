@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JobSwipe — UK Cyber Security (pink light theme)
 
-## Getting Started
+Swipe UK cyber security roles, save favourites Instagram-style, generate tailored cover letters, and apply.
 
-First, run the development server:
+## What's new
+
+- Default feed: **Cyber Security** · **UK**
+- Location permission + manual city (London, Manchester, Remote UK…)
+- Multi-source jobs: **JobSpy** (Indeed, LinkedIn, Glassdoor), Adzuna, Reed
+- Swipe **right = Save**, left = Pass, up = Super Save
+- **Saved** page: full JD, Generate Cover Letter, Apply Now
+- Profile: email + PDF CV (localStorage)
+- Soft pink / light UI
+
+## Run locally
 
 ```bash
+npm install
+cp .env.local.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Works without API keys (JobSpy needs Python — see below). Add Adzuna keys + AI keys for best coverage.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### JobSpy (Indeed / LinkedIn / Glassdoor)
 
-## Learn More
+JobSwipe uses [JobSpy](https://github.com/speedyapply/JobSpy) for live UK listings from major boards.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pip install -r requirements.txt
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Requires **Python 3.10+**. Set `JOBSPY_ENABLED=false` in `.env.local` to disable. JobSpy runs locally via `scripts/jobspy_scrape.py` (not supported on Vercel serverless — use Adzuna there or a Python worker).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Recommended free keys
 
-## Deploy on Vercel
+| Service | Purpose |
+|---------|---------|
+| JobSpy + Python | Indeed, LinkedIn, Glassdoor (local dev) |
+| Adzuna | Best free UK job API |
+| Reed | UK listings |
+| OpenAI or xAI | Cover letters |
+| Resend | Optional real email send |
+| SerpAPI | Google Jobs aggregation |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Swipe
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Action | Meaning |
+|--------|---------|
+| ← / ✕ | Pass |
+| → / bookmark | Save |
+| ↑ / sparkles | Super save |
+
+## Apply flow
+
+1. Profile → email + upload CV (PDF)
+2. Saved → Generate Best Cover Letter
+3. Apply Now → review letter → mailto / Resend / open listing
+
+## Deploy (Vercel)
+
+Push to GitHub → import on Vercel → add env vars → deploy.
