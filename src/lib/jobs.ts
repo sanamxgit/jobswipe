@@ -523,7 +523,7 @@ export async function fetchJobs(
   ] as const;
 
   const results = await Promise.allSettled(named.map((n) => n.promise));
-  let jobs: Job[] = [];
+  const jobs: Job[] = [];
 
   results.forEach((r, i) => {
     const name = named[i].name;
