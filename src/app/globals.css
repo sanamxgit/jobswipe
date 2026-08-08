@@ -1,26 +1,60 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff5f8;
+  --foreground: #4a2040;
+  --muted: #9d6b86;
+  --card: #ffffff;
+  --accent: #ec4899;
+  --accent-soft: #fce7f3;
+  --border: #f9c5d8;
+  --danger: #e11d48;
+  --save: #db2777;
+  --super: #a855f7;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-syne);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(ellipse 90% 55% at 10% -10%, rgba(244, 114, 182, 0.28), transparent),
+    radial-gradient(ellipse 70% 45% at 100% 0%, rgba(251, 207, 232, 0.55), transparent),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(253, 242, 248, 0.9), transparent),
+    var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-syne), var(--font-dm-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(236, 72, 153, 0.28);
+  color: #831843;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #f9a8d4;
+  border-radius: 999px;
 }
